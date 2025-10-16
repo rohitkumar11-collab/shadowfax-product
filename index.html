@@ -6,52 +6,61 @@
   <title>Business Dashboard</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
   <style>
     /* RESET */
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Roboto', sans-serif; background: #f6f7fb; color:#111; }
-    
+    body { font-family: 'Roboto', sans-serif; background: #f4f6fc; color:#111; }
+
     /* HEADER */
-    header { background:#4f46e5; color:white; padding:20px 30px; display:flex; justify-content:space-between; align-items:center; }
-    header h1 { font-family:'Poppins', sans-serif; font-size:24px; }
-    
-    /* Dropdown */
-    .report-select { padding:6px 10px; border-radius:5px; border:none; font-size:14px; }
-    
+    header { background:#4f46e5; color:white; padding:20px 30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    header h1 { font-family:'Poppins', sans-serif; font-size:26px; }
+    .report-select { padding:8px 12px; border-radius:8px; border:none; font-size:15px; }
+
     /* CONTAINER */
-    .container { max-width:1200px; margin:20px auto; padding:0 15px; }
-    
+    .container { max-width:1200px; margin:30px auto; padding:0 15px; }
+
     /* METRIC CARDS */
-    .metrics { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; }
-    .card { flex:1 1 200px; background:white; padding:20px; border-radius:10px; box-shadow:0 6px 18px rgba(17,24,39,0.06); transition:0.3s; cursor:pointer; }
-    .card:hover { transform: translateY(-5px); box-shadow:0 10px 20px rgba(17,24,39,0.1); }
-    .card h2 { font-size:20px; margin-bottom:10px; color:#4f46e5; }
-    .card p { font-size:14px; color:#555; }
-    
+    .metrics { display:flex; flex-wrap:wrap; gap:20px; margin-bottom:40px; }
+    .card { flex:1 1 220px; background:linear-gradient(145deg,#6366f1,#4f46e5); color:white; padding:25px 20px; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.1); transition:0.4s; position:relative; overflow:hidden; cursor:pointer; }
+    .card:hover { transform: translateY(-7px); box-shadow:0 12px 25px rgba(0,0,0,0.15); }
+    .card h2 { font-size:22px; margin-bottom:8px; font-weight:700; }
+    .card p { font-size:15px; opacity:0.9; }
+    .card:before { content:''; position:absolute; width:150%; height:150%; background:rgba(255,255,255,0.1); transform:rotate(45deg); top:-50%; left:-50%; pointer-events:none; }
+
     /* TABLE */
-    table { width:100%; border-collapse:collapse; margin-top:15px; background:white; border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(17,24,39,0.06);}
-    th, td { padding:12px; text-align:center; font-size:14px; }
+    table { width:100%; border-collapse:collapse; margin-top:20px; background:white; border-radius:12px; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,0.08);}
+    th, td { padding:14px; text-align:center; font-size:14px; }
     th { background:#eef0ff; color:#4f46e5; font-weight:700; }
     tbody tr:nth-child(even) { background:#f9faff; }
-    tbody tr:hover { background:#e6e8ff; }
+    tbody tr:hover { background:#e0e4ff; }
     .total-row { font-weight:700; background:#dbe1ff; }
-    
+
+    /* SECTION HEADERS */
+    section h2 { font-family:'Poppins', sans-serif; font-size:22px; color:#4f46e5; margin-bottom:15px; }
+
     /* LEGEND */
-    .legend { margin-top:15px; font-size:14px; background:#e6f4ea; border-left:5px solid #34a853; padding:15px 20px; border-radius:8px; }
-    .legend strong { display:inline-block; width:250px; vertical-align:top; color:#1a7f37; }
-    .legend p { margin:5px 0; color:#1a7f37; }
+    .legend { margin-top:20px; font-size:14px; background:#e6f4ea; border-left:5px solid #34a853; padding:20px; border-radius:12px; line-height:1.6; }
+    .legend strong { display:inline-block; width:280px; vertical-align:top; color:#1a7f37; }
+    .legend p { margin:6px 0; color:#1a7f37; }
 
     /* FOOTER */
-    footer { text-align:center; padding:15px; font-size:12px; color:#666; margin-top:20px; }
+    footer { text-align:center; padding:20px; font-size:13px; color:#666; margin-top:40px; }
 
     /* HIDE REPORTS */
     .report-section { display:none; }
-
-    /* ACTIVE REPORT */
     .active { display:block; }
 
+    /* PROFILING REPORT STYLING */
+    .profiling-container { max-width:1000px; margin:0 auto 30px auto; background: #fff; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow: hidden; }
+    .profiling-header { padding: 20px 24px; color: #fff; background: linear-gradient(90deg, #4f46e5, #6366f1); border-bottom: 2px solid #eef2ff; }
+    .profiling-header h2 { font-size: 22px; margin-bottom:5px; }
+    .profiling-header p { margin:0; font-size:14px; color: #e0e0ff; }
+    .profiling-content { padding: 20px 24px; }
+    .profiling-footer { padding: 15px 24px; border-top: 1px solid #eef2ff; font-size:13px; color:#555; margin-top:10px; background:#f9f9f9; border-radius:0 0 12px 12px; }
+
     /* RESPONSIVE */
-    @media(max-width:768px) {
+    @media(max-width:900px) {
       .metrics { flex-direction:column; }
       .card { width:100%; }
     }
@@ -65,6 +74,7 @@
     <select class="report-select" id="reportSelector">
       <option value="clientOrders">Weekly Client Order Report</option>
       <option value="shipmentReport">Weekly Shipment & Image Report</option>
+      <option value="profilingReport">Weekly Shipment Profiling & Image Validation Report</option>
     </select>
   </header>
 
@@ -78,7 +88,6 @@
         <div class="card"><h2>484</h2><p>Avg Orders / Client</p></div>
         <div class="card"><h2>Abhishek Shah — 6,087</h2><p>Top Client</p></div>
       </div>
-
       <h2>Top Clients</h2>
       <table>
         <thead>
@@ -100,7 +109,6 @@
         <div class="card"><h2>21.91%</h2><p>% Profiled AWBs</p></div>
         <div class="card"><h2>26,115</h2><p>Valid Images</p></div>
       </div>
-
       <h2>Shipment Summary</h2>
       <table>
         <thead>
@@ -114,7 +122,6 @@
           </tr>
         </tbody>
       </table>
-
       <div class="legend">
         <p><strong>Total Kartrocket AWBs:</strong> Total shipments received.</p>
         <p><strong>Total AWBs Profiled:</strong> Number of shipments profiled.</p>
@@ -122,6 +129,61 @@
         <p><strong>% Weight > API:</strong> % shipments where weight is greater than API.</p>
         <p><strong>% API > Weight:</strong> % shipments where API weight is higher.</p>
         <p><strong>% Equal:</strong> % shipments with equal weight.</p>
+      </div>
+    </section>
+
+    <!-- PROFILING REPORT -->
+    <section id="profilingReport" class="report-section">
+      <div class="profiling-container">
+        <div class="profiling-header">
+          <h2>Shipment Profiling Summary Report</h2>
+          <p>Period: 22 Sep 2025 – 28 Sep 2025</p>
+        </div>
+        <div class="profiling-content">
+          <table class="profiling-table">
+            <thead>
+              <tr>
+                <th>Total Kartrocket AWBs</th>
+                <th>Total AWBs Profiled</th>
+                <th>% Profiled AWBs</th>
+                <th>% Profiled Weight Greater</th>
+                <th>% API Weight Higher</th>
+                <th>% Equal Weight</th>
+                <th>% Total Comparison</th>
+                <th>Valid Images to be Sent</th>
+                <th>% Total Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="total-row">
+                <td>121,044</td>
+                <td>26,525</td>
+                <td>21.91</td>
+                <td>90.77</td>
+                <td>1.55</td>
+                <td>7.68</td>
+                <td>100</td>
+                <td>26,115</td>
+                <td>21.57</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="legend">
+            <p><strong>Total Kartrocket AWBs:</strong> Total shipments received from the client.</p>
+            <p><strong>Total AWBs Profiled:</strong> Number of shipments that have been profiled.</p>
+            <p><strong>% Profiled AWBs:</strong> Percentage of profiled shipments relative to total shipments.</p>
+            <p><strong>% Profiled Weight Greater:</strong> Percentage of shipments where profiled weight is greater than API weight.</p>
+            <p><strong>% API Weight Higher:</strong> Percentage of shipments where API weight is higher than profiled weight.</p>
+            <p><strong>% Equal Weight:</strong> Percentage of shipments where API weight equals profiled weight.</p>
+            <p><strong>% Total Comparison:</strong> Percentage showing how many shipments were compared between API and profiler weights.</p>
+            <p><strong>Valid Images to be Sent:</strong> Number of valid images that should be sent.</p>
+            <p><strong>% Total Weight:</strong> Percentage of valid images relative to total shipments.</p>
+          </div>
+        </div>
+        <div class="profiling-footer">
+          This report shows total shipments, profiling coverage, weight comparisons, and valid images to be sent.
+        </div>
       </div>
     </section>
 
