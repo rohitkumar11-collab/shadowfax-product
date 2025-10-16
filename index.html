@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Dashboard</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* RESET */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Roboto', sans-serif; background: #f6f7fb; color:#111; }
+    
+    /* HEADER */
+    header { background:#4f46e5; color:white; padding:20px 30px; display:flex; justify-content:space-between; align-items:center; }
+    header h1 { font-family:'Poppins', sans-serif; font-size:24px; }
+    
+    /* Dropdown */
+    .report-select { padding:6px 10px; border-radius:5px; border:none; font-size:14px; }
+    
+    /* CONTAINER */
+    .container { max-width:1200px; margin:20px auto; padding:0 15px; }
+    
+    /* METRIC CARDS */
+    .metrics { display:flex; flex-wrap:wrap; gap:15px; margin-bottom:30px; }
+    .card { flex:1 1 200px; background:white; padding:20px; border-radius:10px; box-shadow:0 6px 18px rgba(17,24,39,0.06); transition:0.3s; cursor:pointer; }
+    .card:hover { transform: translateY(-5px); box-shadow:0 10px 20px rgba(17,24,39,0.1); }
+    .card h2 { font-size:20px; margin-bottom:10px; color:#4f46e5; }
+    .card p { font-size:14px; color:#555; }
+    
+    /* TABLE */
+    table { width:100%; border-collapse:collapse; margin-top:15px; background:white; border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(17,24,39,0.06);}
+    th, td { padding:12px; text-align:center; font-size:14px; }
+    th { background:#eef0ff; color:#4f46e5; font-weight:700; }
+    tbody tr:nth-child(even) { background:#f9faff; }
+    tbody tr:hover { background:#e6e8ff; }
+    .total-row { font-weight:700; background:#dbe1ff; }
+    
+    /* LEGEND */
+    .legend { margin-top:15px; font-size:14px; background:#e6f4ea; border-left:5px solid #34a853; padding:15px 20px; border-radius:8px; }
+    .legend strong { display:inline-block; width:250px; vertical-align:top; color:#1a7f37; }
+    .legend p { margin:5px 0; color:#1a7f37; }
+
+    /* FOOTER */
+    footer { text-align:center; padding:15px; font-size:12px; color:#666; margin-top:20px; }
+
+    /* HIDE REPORTS */
+    .report-section { display:none; }
+
+    /* ACTIVE REPORT */
+    .active { display:block; }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      .metrics { flex-direction:column; }
+      .card { width:100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Business Dashboard</h1>
+    <select class="report-select" id="reportSelector">
+      <option value="clientOrders">Weekly Client Order Report</option>
+      <option value="shipmentReport">Weekly Shipment & Image Report</option>
+    </select>
+  </header>
+
+  <div class="container">
+
+    <!-- CLIENT ORDERS REPORT -->
+    <section id="clientOrders" class="report-section active">
+      <div class="metrics">
+        <div class="card"><h2>7,745</h2><p>Total Orders</p></div>
+        <div class="card"><h2>16</h2><p>Unique Clients</p></div>
+        <div class="card"><h2>484</h2><p>Avg Orders / Client</p></div>
+        <div class="card"><h2>Abhishek Shah — 6,087</h2><p>Top Client</p></div>
+      </div>
+
+      <h2>Top Clients</h2>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Client</th><th>Total Orders</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Abhishek Shah</td><td>6,087</td></tr>
+          <tr><td>2</td><td>Richy Dave</td><td>1,241</td></tr>
+          <tr><td>3</td><td>Sumit Grewal</td><td>193</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SHIPMENT REPORT -->
+    <section id="shipmentReport" class="report-section">
+      <div class="metrics">
+        <div class="card"><h2>121,044</h2><p>Total Kartrocket AWBs</p></div>
+        <div class="card"><h2>26,525</h2><p>Total AWBs Profiled</p></div>
+        <div class="card"><h2>21.91%</h2><p>% Profiled AWBs</p></div>
+        <div class="card"><h2>26,115</h2><p>Valid Images</p></div>
+      </div>
+
+      <h2>Shipment Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Total AWBs</th><th>Profiled</th><th>% Profiled</th><th>% Weight > API</th><th>% API > Weight</th><th>% Equal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="total-row">
+            <td>121,044</td><td>26,525</td><td>21.91%</td><td>90.77%</td><td>1.55%</td><td>7.68%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="legend">
+        <p><strong>Total Kartrocket AWBs:</strong> Total shipments received.</p>
+        <p><strong>Total AWBs Profiled:</strong> Number of shipments profiled.</p>
+        <p><strong>% Profiled AWBs:</strong> Percentage of profiled shipments.</p>
+        <p><strong>% Weight > API:</strong> % shipments where weight is greater than API.</p>
+        <p><strong>% API > Weight:</strong> % shipments where API weight is higher.</p>
+        <p><strong>% Equal:</strong> % shipments with equal weight.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>© 2025 Business Dashboard. All Rights Reserved.</footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const selector = document.getElementById('reportSelector');
+    const reports = document.querySelectorAll('.report-section');
+
+    selector.addEventListener('change', () => {
+      const value = selector.value;
+      reports.forEach(report => report.classList.remove('active'));
+      document.getElementById(value).classList.add('active');
+    });
+  </script>
+
+</body>
+</html>
